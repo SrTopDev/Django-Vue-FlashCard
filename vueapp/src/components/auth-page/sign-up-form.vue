@@ -7,7 +7,7 @@
         'px-8': $vuetify.breakpoint.mdAndUp,
       }"
     >
-      <img src="team.png" class="team-img" />
+      <img src="@/assets/img/team.png" class="team-img" />
       <h1 class="font-weight-bold">Create Account</h1>
       <v-text-field
         placeholder="Username"

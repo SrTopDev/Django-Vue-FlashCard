@@ -24,25 +24,22 @@
                 class="mx-2"
                 dark
                 color="teal"
+                @click="showSettingsModal = true"
               >
                 <v-icon dark>
                   mdi-format-list-bulleted-square
                 </v-icon>
               </v-btn>
           </div>
-          <v-img
-            :aspect-ratio="16/9"
-            
-            src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
-          ></v-img>
-          <v-btn
-            class="ma-2"
-            outlined
-            color="indigo"
-            @click="showSettingsModal = true"
-          >
-            Settings
-          </v-btn>
+          <div id="img-zoomer-box">
+              <v-img
+                id="img-1"
+                alt="Zoom Image on Mouseover"
+                :aspect-ratio="16/9"
+                src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
+              ></v-img>
+              <div id="img-2"></div>
+          </div>
         </v-col>
         <v-col cols="12" lg="6" class="v1">
           <span class="title text-secondary py-2 font-weight-bold">EXERCISE</span>
@@ -70,53 +67,60 @@
             <p class="py-2 font-weight-bold">Preview: </p>&nbsp;<p class="py-2 font-weight-bold">Correct</p>
           </v-row>
           <v-row class="mt-5 justify-space-between">
+              <v-col>
               <v-btn
                 class="ma-2"
                 outlined
                 color="indigo"
-                min-width="120"
+                width="120"
               >
                 Correct
               </v-btn>
+              <p>{{level[0]}}</p>
+              </v-col>
+              <v-col>
               <v-btn
                 class="ma-2"
                 outlined
                 color="indigo"
-                min-width="120"
+                width="120"
               >
                 Easy
               </v-btn>
+              <p>{{level[1]}}</p>
+              </v-col>
+              <v-col>
               <v-btn
                 class="ma-2"
                 outlined
                 color="indigo"
-                min-width="120"
+                width="120"
               >
                 Mistake
               </v-btn>
+              <p>{{level[2]}}</p>
+              </v-col>
+              <v-col>
               <v-btn
                 class="ma-2"
                 outlined
                 color="indigo"
-                min-width="120"
+                width="120"
               >
                 Difficult
               </v-btn>
+              <p>{{level[3]}}</p>
+              </v-col>
+              <v-col>
               <v-btn
                 class="ma-2"
                 outlined
                 color="indigo"
-                min-width="120"
+                width="120"
               >
                 Skip
               </v-btn>
-          </v-row>
-          <v-row class="mt-5 justify-space-between">
-              <p>{{level[0]}}</p>
-              <p>{{level[1]}}</p>
-              <p>{{level[2]}}</p>
-              <p>{{level[3]}}</p>
-              <p></p>
+              </v-col>
           </v-row>
           <v-row class="mt-3 justify-space-between">
           <v-col cols="6" id="parent">
@@ -138,12 +142,13 @@
             ></v-select>
           </v-col>
           <v-col cols="6">
+          &nbsp;&nbsp;
             <v-btn
                 rounded
                 class="mt-3 float-end"
             >
               Close
-            </v-btn>&nbsp;&nbsp;
+            </v-btn>
             <v-btn
               rounded
               color="primary"
@@ -253,44 +258,44 @@
             >
           <h3>Waiting period for looking back</h3>
           <v-row>
-              <v-col cols="6">Correct(not difficult)</v-col>
-              <v-col cols="3"><vue-numeric-input v-model="not_difficult_value" :min="1" :max="30" size="110px" controls-type="updown" autofocus>
+              <v-col cols="4" class=" text-left">Correct(not difficult)</v-col>
+              <v-col cols="4"><vue-numeric-input v-model="not_difficult_value" :min="1" :max="30" controls-type="updown" autofocus>
                               </vue-numeric-input>
               </v-col>
-              <v-col cols="3">
+              <v-col cols="4">
                   <v-combobox
                     solo dense
                   ></v-combobox>
               </v-col>
           </v-row>
           <v-row>
-              <v-col cols="6">Correct(easy)</v-col>
-              <v-col cols="3"><vue-numeric-input v-model="easy_value" :min="1" :max="30" size="110px" controls-type="updown" autofocus>
+              <v-col cols="4" class=" text-left">Correct(easy)</v-col>
+              <v-col cols="4"><vue-numeric-input v-model="easy_value" :min="1" :max="30" controls-type="updown" autofocus>
                               </vue-numeric-input>
               </v-col>
-              <v-col cols="3">
+              <v-col cols="4">
                   <v-combobox
                     solo dense
                   ></v-combobox>
               </v-col>
           </v-row>
           <v-row>
-              <v-col cols="6">Wrong(mistake)</v-col>
-              <v-col cols="3"><vue-numeric-input v-model="mistake_value" :min="1" :max="30" size="110px" controls-type="updown" autofocus>
+              <v-col cols="4" class=" text-left">Wrong(mistake)</v-col>
+              <v-col cols="4"><vue-numeric-input v-model="mistake_value" :min="1" :max="30" controls-type="updown" autofocus>
                               </vue-numeric-input>
               </v-col>
-              <v-col cols="3">
+              <v-col cols="4">
                   <v-combobox
                     solo dense
                   ></v-combobox>
               </v-col>
           </v-row>
           <v-row>
-              <v-col cols="6">Wrong(difficult)</v-col>
-              <v-col cols="3"><vue-numeric-input v-model="difficultvalue" :min="1" :max="30" size="110px" controls-type="updown" autofocus>
+              <v-col cols="4" class=" text-left">Wrong(difficult)</v-col>
+              <v-col cols="4"><vue-numeric-input v-model="difficult_value" :min="1" :max="30" controls-type="updown" autofocus>
                               </vue-numeric-input>
               </v-col>
-              <v-col cols="3">
+              <v-col cols="4">
                   <v-combobox
                     solo dense
                   ></v-combobox>
@@ -298,11 +303,13 @@
           </v-row>
           <h3>Planning</h3>
           <v-row class="mb-4">
-              <v-col cols="6">Number of exercises to do </v-col>
-              <v-col cols="3"><vue-numeric-input v-model="number_exercises_value" :min="1" :max="30" size="110px" controls-type="updown" autofocus>
+              <v-col cols="4" class=" text-left">Number of exercises to do </v-col>
+              <v-col cols="4" class=" text-left"><vue-numeric-input v-model="number_exercises_value" :min="1" :max="30" controls-type="updown" autofocus>
                               </vue-numeric-input>
               </v-col>
-              <v-col cols="6">Day of exercise </v-col>
+          </v-row>
+          <v-row class="mb-4">
+              <v-col cols="4" class=" text-left">Day of exercise </v-col>
               <v-col cols="2">
               <v-checkbox
                 v-model="mon"
@@ -370,7 +377,7 @@
           <h3>Reward</h3>
           <v-row class="mb-4">
               <v-col cols="6">points </v-col>
-              <v-col cols="3"><vue-numeric-input v-model="points_value" :min="1" :max="30" size="110px" controls-type="updown" autofocus>
+              <v-col cols="3"><vue-numeric-input v-model="points_value" :min="1" controls-type="updown" autofocus>
                               </vue-numeric-input>
               </v-col>
           </v-row>
@@ -388,6 +395,40 @@ export default {
   components: {
     VueNumericInput
   },
+  mounted() {
+    let zoomer = function (){
+      document.querySelector('#img-zoomer-box')
+        .addEventListener('mousemove', function(e) {
+
+        let original = document.querySelector('#img-1'),
+            magnified = document.querySelector('#img-2'),
+            style = magnified.style,
+            x = e.pageX - this.offsetLeft,
+            y = e.pageY - this.offsetTop,
+            imgWidth = original.offsetWidth,
+            imgHeight = original.offsetHeight,
+            xperc = ((x/imgWidth) * 100),
+            yperc = ((y/imgHeight) * 100);
+
+        //lets user scroll past right edge of image
+        if(x > (.01 * imgWidth)) {
+          xperc += (.15 * xperc);
+        };
+
+        //lets user scroll past bottom edge of image
+        if(y >= (.01 * imgHeight)) {
+          yperc += (.15 * yperc);
+        };
+
+        style.backgroundPositionX = (xperc - 24) + '%';
+        style.backgroundPositionY = (yperc - 24) + '%';
+
+        style.left = (x - 250) + 'px';
+        style.top = (y - 230) + 'px';
+
+      }, false);
+    }();
+  },
   data: () => ({
     not_difficult_value: 1,
     easy_value: 1,
@@ -397,7 +438,7 @@ export default {
     points_value: 34,
     mon: false,
     tue: false,
-    wed: false,
+    wen: false,
     thu: false,
     fri: false,
     sat: false,
@@ -474,7 +515,7 @@ export default {
         ],
       },
     ],
-    level: ["1days" ,"4weeks","4hours","1hours"],
+    level: ["1 days" ,"4 weeks","4 hours","1 hours"],
     items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
     showModal: false,
     showTreeviewModal: false,
@@ -529,10 +570,48 @@ export default {
           });
         });
     },
+    onSettingsOk() {
+
+    }
   },
 };
 </script>
 <style scoped>
 #parent { white-space: nowrap; }
 .child { display: inline-block; }
+
+#img-zoomer-box {
+  max-width: 800px;
+  height: auto;
+  position: relative;
+  margin: 10px auto;
+}
+
+#img-1 {
+  width: 100%;
+  height: auto;
+}
+
+#img-zoomer-box:hover, #img-zoomer-box:active {
+  cursor: zoom-in;
+  display: block;
+}
+
+#img-zoomer-box:hover #img-2, #img-zoomer-box:active #img-2 {
+  opacity: 1;
+}
+#img-2 {
+  width: 340px;
+  height: 340px;
+  background: url('https://cdn.vuetifyjs.com/images/parallax/material.jpg') no-repeat #FFF;
+  box-shadow: 0 5px 10px -2px rgba(0,0,0,0.3);
+  pointer-events: none;
+  position: absolute;
+  opacity: 0;
+  border: 4px solid whitesmoke;
+  z-index: 99;
+  border-radius: 100%;
+  display: block;
+  transition: opacity .2s;
+}
 </style>
