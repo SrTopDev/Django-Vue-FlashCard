@@ -3,12 +3,12 @@
     <v-form
       action="#"
       :class="{
-        'px-2': $vuetify.breakpoint.smAndDown,
+        'px-2 mt-12': $vuetify.breakpoint.smAndDown,
         'px-8': $vuetify.breakpoint.mdAndUp,
       }"
     >
-      <img src="@/assets/img/team.png" class="team-img" />
-      <h1 class="font-weight-bold">Create Account</h1>
+      <img src="/static/src/vue/dist/img/team.png" class="team-img pt-10" />
+      <h1 class="pb-12 font-weight-bold">Create Account</h1>
       <v-text-field
         placeholder="Username"
         prepend-inner-icon="mdi-account"
@@ -16,14 +16,14 @@
         v-model="formData.username"
       ></v-text-field>
       <v-text-field
-        placeholder="Password"
+        placeholder="Password(repeat)"
         prepend-inner-icon="mdi-lock"
         filled
         v-model="formData.password"
         type="password"
       ></v-text-field>
       <v-text-field
-        placeholder="Password(repeat)"
+        placeholder="Password"
         prepend-inner-icon="mdi-lock"
         filled
         v-model="formData.repeat_password"
@@ -51,6 +51,14 @@ export default {
       },
       set: function (newVal) {
         this.$store.commit("authPageModule/setIsSignInPanelActive", newVal);
+      },
+    },
+    currentSignUpStep: {
+      get: function () {
+        return this.$store.getters["authPageModule/getCurrentSignUpStep"];
+      },
+      set: function (newVal) {
+        this.$store.commit("authPageModule/setCurrentSignUpStep", newVal);
       },
     },
     formData: {

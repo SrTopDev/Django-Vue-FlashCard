@@ -5,7 +5,7 @@
       }">
     <!-- avatar -->
     <v-row class="justify-center">
-      <v-avatar size="80px">
+      <v-avatar size="150px">
         <img src="../assets/img/avatar.jpg" />
       </v-avatar>
     </v-row>
@@ -15,237 +15,236 @@
     </v-row>
     <v-row>
         <v-col cols="12" lg="6">
-          <p class="title text-secondary py-2 font-weight-bold">TITLE</p>
-          <div class="row justify-space-between mb-5">
-              <v-btn color="primary" @click="showModal = true">
-                Select Exercise
-              </v-btn>
-              <v-btn
-                class="mx-2"
-                dark
-                color="teal"
-                @click="showSettingsModal = true"
-              >
+            <p class="title text-secondary py-2 font-weight-bold">TITLE</p>
+            <div class="row justify-space-between mt-5 mb-5">
+                <v-btn color="primary" @click="showModal = true">
+                    Select Exercise
+                </v-btn>
+                <v-btn
+                    class="mx-2"
+                    dark
+                    color="teal"
+                    @click="showSettingsModal = true"
+                >
                 <v-icon dark>
-                  mdi-format-list-bulleted-square
+                    mdi-format-list-bulleted-square
                 </v-icon>
-              </v-btn>
-          </div>
-          <div id="img-zoomer-box">
-              <v-img
-                id="img-1"
-                alt="Zoom Image on Mouseover"
-                :aspect-ratio="16/9"
-                src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
-              ></v-img>
-              <div id="img-2"></div>
-          </div>
-        </v-col>
-        <v-col cols="12" lg="6" class="v1">
-          <span class="title text-secondary py-2 font-weight-bold">EXERCISE</span>
-          <v-select
-            :items="items"
-            label="Up to Down"
-            dense
-            solo
-            class="mt-5"
-          ></v-select>
-          <v-img
-            :aspect-ratio="16/9"
-            :height="200"
-            src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
-          ></v-img>
-          <v-row class="mt-5 justify-center">
-              <v-btn
-                rounded
-                color="primary"
-                dark
-              >
-                Check Answer
-              </v-btn>
-              &nbsp;&nbsp;&nbsp;              
-            <p class="py-2 font-weight-bold">Preview: </p>&nbsp;<p class="py-2 font-weight-bold">Correct</p>
-          </v-row>
-          <v-row class="mt-5 justify-space-between">
-              <v-col>
-              <v-btn
-                class="ma-2"
-                outlined
-                color="indigo"
-                width="120"
-              >
-                Correct
-              </v-btn>
-              <p>{{level[0]}}</p>
-              </v-col>
-              <v-col>
-              <v-btn
-                class="ma-2"
-                outlined
-                color="indigo"
-                width="120"
-              >
-                Easy
-              </v-btn>
-              <p>{{level[1]}}</p>
-              </v-col>
-              <v-col>
-              <v-btn
-                class="ma-2"
-                outlined
-                color="indigo"
-                width="120"
-              >
-                Mistake
-              </v-btn>
-              <p>{{level[2]}}</p>
-              </v-col>
-              <v-col>
-              <v-btn
-                class="ma-2"
-                outlined
-                color="indigo"
-                width="120"
-              >
-                Difficult
-              </v-btn>
-              <p>{{level[3]}}</p>
-              </v-col>
-              <v-col>
-              <v-btn
-                class="ma-2"
-                outlined
-                color="indigo"
-                width="120"
-              >
-                Skip
-              </v-btn>
-              </v-col>
-          </v-row>
-          <v-row class="mt-3 justify-space-between">
-          <v-col cols="6" id="parent">
-            <v-btn
-              rounded
-              color="primary"
-              dark
-              class="child"
-            >
-              Restart
-            </v-btn>&nbsp;&nbsp;
-            <v-select
-              :items="items"
-              :style="{width: '100px'}"
-              label="In Order"
-              dense
-              outlined
-              class="child"
-            ></v-select>
-          </v-col>
-          <v-col cols="6">
-          &nbsp;&nbsp;
-            <v-btn
-                rounded
-                class="mt-3 float-end"
-            >
-              Close
-            </v-btn>
-            <v-btn
-              rounded
-              color="primary"
-              dark
-              class="mt-3 float-end"
-            >
-              Check Progress
-            </v-btn>
+                </v-btn>
+            </div>
+            <div class="imageZoom">
+                <vue-hover-zoom 
+                    :imageUrl="imgURL"
+                >
+                </vue-hover-zoom>
+            </div>
             
-          </v-col>
-          </v-row>
+        </v-col>
+        <v-col cols="12" lg="6">
+            <p class="title text-secondary py-2 font-weight-bold">EXERCISE</p>
+            <v-select
+                :items="uptodown_items"
+                label="Up to Down"
+                dense
+                solo
+            ></v-select>
+            <v-img
+              :aspect-ratio="16/9"
+              :height="500"
+              :src="imgURL"
+            ></v-img>
+            <v-row class="mt-5 justify-center">
+                <v-btn
+                  rounded
+                  color="primary"
+                  dark
+                >
+                  Check Answer
+                </v-btn>
+                &nbsp;&nbsp;&nbsp;              
+              <p class="py-2 font-weight-bold">Preview: </p>&nbsp;<p class="py-2 font-weight-bold">Correct</p>
+            </v-row>
+            <v-row class="mt-5 justify-space-between dialog">
+                <v-col>
+                <v-btn
+                  class="ma-2"
+                  outlined
+                  color="indigo"
+                  width="120"
+                >
+                  Correct
+                </v-btn>
+                <p>{{level[0]}}</p>
+                </v-col>
+                <v-col>
+                <v-btn
+                  class="ma-2"
+                  outlined
+                  color="indigo"
+                  width="120"
+                >
+                  Easy
+                </v-btn>
+                <p>{{level[1]}}</p>
+                </v-col>
+                <v-col>
+                <v-btn
+                  class="ma-2"
+                  outlined
+                  color="indigo"
+                  width="120"
+                >
+                  Mistake
+                </v-btn>
+                <p>{{level[2]}}</p>
+                </v-col>
+                <v-col>
+                <v-btn
+                  class="ma-2"
+                  outlined
+                  color="indigo"
+                  width="120"
+                >
+                  Difficult
+                </v-btn>
+                <p>{{level[3]}}</p>
+                </v-col>
+                <v-col>
+                <v-btn
+                  class="ma-2"
+                  outlined
+                  color="indigo"
+                  width="120"
+                >
+                  Skip
+                </v-btn>
+                </v-col>
+            </v-row>
+            <v-row class="mt-10">
+              <v-col>
+                <v-btn
+                  rounded
+                  color="primary"
+                  dark
+                  width="150"
+                >
+                  Restart
+                </v-btn>
+              </v-col>
+              <v-col>
+                <v-select
+                  :items="items"
+                  :style="{width: '100px'}"
+                  label="In Order"
+                  dense
+                  outlined
+                  width="150"
+                ></v-select>
+              </v-col>
+              <v-col>
+                <v-btn
+                    rounded
+                    width="150"
+                >
+                  Close
+                </v-btn>
+              </v-col>
+              <v-col>
+                <v-btn
+                  rounded
+                  color="primary"
+                  darkwidth="150"
+                >
+                  Check Progress
+                </v-btn>
+              </v-col>
+            </v-row>
         </v-col>
     </v-row>
+
+    <!-- List Modal -->
     <transition name="fade" appear>
-      <div class="modal-overlay"
-          v-if="showModal"
-          @click="showModal = false"></div>
+        <div class="modal-overlay"
+            v-if="showModal"
+            @click="showModal = false">
+        </div>
     </transition>
     <transition name="pop" appear>
-      <div class="modal"
+        <div class="modal"
             role="dialog"
             v-if="showModal"
             >
-          <h1>Vue Transitions</h1>
-          <v-list shaped dense min-height="240">
-            <v-subheader>SUBJECTS</v-subheader>
-            <v-list-item-group
-              v-model="selectedItem"
-              color="primary"
-            >
-              <v-list-item
-                v-for="(item, i) in items"
-                :key="i"
-              >
-                <v-list-item-icon>
-                  <v-icon v-text="item.icon"></v-icon>
-                </v-list-item-icon>
-                <v-list-item-content>
-                  <v-list-item-title v-text="item.text"></v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-            </v-list-item-group>
-          </v-list>
-           <v-file-input
-            v-model="files"
-            color="deep-purple accent-4"
-            counter
-            label="File input"
-            multiple
-            placeholder="Select your files"
-            prepend-icon="mdi-paperclip"
-            outlined
-            :show-size="1000"
-          >
-            <template v-slot:selection="{ index, text }">
-              <v-chip
-                v-if="index < 2"
+            <h1>Vue Transitions</h1>
+            <v-list shaped dense min-height="240">
+                <v-subheader>SUBJECTS</v-subheader>
+                <v-list-item-group
+                    v-model="selectedItem"
+                    color="primary">
+                        <v-list-item
+                            v-for="(item, i) in items"
+                            :key="i">
+                            <v-list-item-icon>
+                              <v-icon v-text="item.icon"></v-icon>
+                            </v-list-item-icon>
+                            <v-list-item-content>
+                              <v-list-item-title v-text="item.text"></v-list-item-title>
+                            </v-list-item-content>
+                        </v-list-item>
+                </v-list-item-group>
+            </v-list>
+            <v-file-input
+                v-model="files"
                 color="deep-purple accent-4"
-                dark
-                label
-                small
-              >
-                {{ text }}
-              </v-chip>
+                counter
+                label="File input"
+                multiple
+                placeholder="Select your files"
+                prepend-icon="mdi-paperclip"
+                outlined
+                :show-size="1000"
+            >
+                <template v-slot:selection="{ index, text }">
+                    <v-chip
+                      v-if="index < 2"
+                      color="deep-purple accent-4"
+                      dark
+                      label
+                      small
+                    >
+                      {{ text }}
+                    </v-chip>
 
-              <span
-                v-else-if="index === 2"
-                class="text-overline grey--text text--darken-3 mx-2"
-              >
-                +{{ files.length - 2 }} File(s)
-              </span>
-            </template>
-          </v-file-input>
-          <v-btn color="primary" @click="onClickOk">OK</v-btn>&nbsp;&nbsp;&nbsp;
-          <v-btn outlined color="indigo" @click="showModal = false">CANCEL</v-btn>
-      </div>
+                    <span
+                      v-else-if="index === 2"
+                      class="text-overline grey--text text--darken-3 mx-2"
+                    >
+                      +{{ files.length - 2 }} File(s)
+                    </span>
+                </template>
+            </v-file-input>
+            <v-btn color="primary" @click="onClickOk">OK</v-btn>&nbsp;&nbsp;&nbsp;
+            <v-btn outlined color="indigo" @click="showModal = false">CANCEL</v-btn>
+        </div>
     </transition>
-<!--- Treeview Modal  --->
-      <transition name="fade" appear>
+    <!-- Treeview Modal -->
+    <transition name="fade" appear>
         <div class="modal-overlay"
             v-if="showTreeviewModal"
             @click="showTreeviewModal = false"></div>
-      </transition>
-    <transition name="pop" appear>
-      <div class="modal"
-            role="dialog"
-            v-if="showTreeviewModal"
-            >
-          <h1>Vue Transitions</h1>
-          <v-treeview
-            selectable
-            :items="rows"
-          ></v-treeview>
-          <v-btn color="primary" @click="onTreeviewOk">OK</v-btn>
-      </div>
     </transition>
-<!-- Settings Modal -->
+    <transition name="pop" appear>
+        <div class="modal"
+              role="dialog"
+              v-if="showTreeviewModal"
+              >
+            <h1>Vue Transitions</h1>
+            <v-treeview
+              selectable
+              :items="rows"
+            ></v-treeview>
+            <v-btn color="primary" @click="onTreeviewOk">OK</v-btn>
+        </div>
+    </transition>
+    <!-- Setting Modal -->
     <transition name="fade" appear>
       <div class="modal-overlay"
           v-if="showSettingsModal"
@@ -264,6 +263,8 @@
               </v-col>
               <v-col cols="4">
                   <v-combobox
+                    v-model="not_difficult_value_combo"
+                    :items="not_difficult_value_items"
                     solo dense
                   ></v-combobox>
               </v-col>
@@ -275,6 +276,8 @@
               </v-col>
               <v-col cols="4">
                   <v-combobox
+                    v-model="easy_value_combo"
+                    :items="easy_value_items"
                     solo dense
                   ></v-combobox>
               </v-col>
@@ -286,9 +289,20 @@
               </v-col>
               <v-col cols="4">
                   <v-combobox
+                    v-model="mistake_value_combo"
+                    :items="mistake_value_items"
                     solo dense
                   ></v-combobox>
               </v-col>
+              <div id="img-zoomer-box">
+              <v-img
+                id="img-1"
+                alt="Zoom Image on Mouseover"
+                :aspect-ratio="16/9"
+                src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
+              ></v-img>
+              <div id="img-2"></div>
+          </div>
           </v-row>
           <v-row>
               <v-col cols="4" class=" text-left">Wrong(difficult)</v-col>
@@ -297,6 +311,8 @@
               </v-col>
               <v-col cols="4">
                   <v-combobox
+                    v-model="difficult_value_combo"
+                    :items="difficult_value_items"
                     solo dense
                   ></v-combobox>
               </v-col>
@@ -390,143 +406,145 @@
 
 <script>
 import VueNumericInput from 'vue-numeric-input'
+import VueHoverZoom from 'vue-hover-zoom'
 
 export default {
   components: {
-    VueNumericInput
+      VueNumericInput,
+      VueHoverZoom
   },
   mounted() {
-    let zoomer = function (){
-      document.querySelector('#img-zoomer-box')
-        .addEventListener('mousemove', function(e) {
 
-        let original = document.querySelector('#img-1'),
-            magnified = document.querySelector('#img-2'),
-            style = magnified.style,
-            x = e.pageX - this.offsetLeft,
-            y = e.pageY - this.offsetTop,
-            imgWidth = original.offsetWidth,
-            imgHeight = original.offsetHeight,
-            xperc = ((x/imgWidth) * 100),
-            yperc = ((y/imgHeight) * 100);
-
-        //lets user scroll past right edge of image
-        if(x > (.01 * imgWidth)) {
-          xperc += (.15 * xperc);
-        };
-
-        //lets user scroll past bottom edge of image
-        if(y >= (.01 * imgHeight)) {
-          yperc += (.15 * yperc);
-        };
-
-        style.backgroundPositionX = (xperc - 24) + '%';
-        style.backgroundPositionY = (yperc - 24) + '%';
-
-        style.left = (x - 250) + 'px';
-        style.top = (y - 230) + 'px';
-
-      }, false);
-    }();
   },
   data: () => ({
-    not_difficult_value: 1,
-    easy_value: 1,
-    mistake_value: 1,
-    difficult_value: 1,
-    number_exercises_value: 1,
-    points_value: 34,
-    mon: false,
-    tue: false,
-    wen: false,
-    thu: false,
-    fri: false,
-    sat: false,
-    sun: false,
-    rows: [
-      {
-        id: 1,
-        name: 'Applications :',
-        children: [
-          { id: 2, name: 'Calendar : app' },
-          { id: 3, name: 'Chrome : app' },
-          { id: 4, name: 'Webstorm : app' },
+      imgURL: '/static/src/vue/dist/img/OM1-1.jpeg',
+      showModal: false,
+      showTreeviewModal: false,
+      showSettingsModal: false,
+      selectedItem: 0,
+      not_difficult_value: 1,
+      easy_value: 1,
+      mistake_value: 1,
+      difficult_value: 1,
+      number_exercises_value: 1,
+      uptodown_items: [
+          'History',
+      ],
+      level: ["1 days" ,"4 weeks","4 hours","1 hours"],
+      not_difficult_value_combo: ['Vuetify'],
+      not_difficult_value_items: [
+          'Programming',
+          'Design',
+          'Vue',
+          'Vuetify',
         ],
-      },
-      {
-        id: 5,
-        name: 'Documents :',
-        children: [
-          {
-            id: 6,
-            name: 'vuetify :',
-            children: [
-              {
-                id: 7,
-                name: 'src :',
-                children: [
-                  { id: 8, name: 'index : ts' },
-                  { id: 9, name: 'bootstrap : ts' },
-                ],
-              },
-            ],
-          },
-          {
-            id: 10,
-            name: 'material2 :',
-            children: [
-              {
-                id: 11,
-                name: 'src :',
-                children: [
-                  { id: 12, name: 'v-btn : ts' },
-                  { id: 13, name: 'v-card : ts' },
-                  { id: 14, name: 'v-window : ts' },
-                ],
-              },
-            ],
-          },
+      easy_value_combo: ['Design'],
+      easy_value_items: [
+          'Programming',
+          'Design',
+          'Vue',
+          'Vuetify',
         ],
-      },
-      {
-        id: 15,
-        name: 'Downloads :',
-        children: [
-          { id: 16, name: 'October : pdf' },
-          { id: 17, name: 'November : pdf' },
-          { id: 18, name: 'Tutorial : html' },
+      mistake_value_combo: ['Vue'],
+      mistake_value_items: [
+          'Programming',
+          'Design',
+          'Vue',
+          'Vuetify',
         ],
-      },
-      {
-        id: 19,
-        name: 'Videos :',
-        children: [
-          {
-            id: 20,
-            name: 'Tutorials :',
-            children: [
-              { id: 21, name: 'Basic layouts : mp4' },
-              { id: 22, name: 'Advanced techniques : mp4' },
-              { id: 23, name: 'All about app : dir' },
-            ],
-          },
-          { id: 24, name: 'Intro : mov' },
-          { id: 25, name: 'Conference introduction : avi' },
+      difficult_value_combo: ['Vuetify'],
+      difficult_value_items: [
+          'Programming',
+          'Design',
+          'Vue',
+          'Vuetify',
         ],
-      },
-    ],
-    level: ["1 days" ,"4 weeks","4 hours","1 hours"],
-    items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
-    showModal: false,
-    showTreeviewModal: false,
-    showSettingsModal: false,
-    selectedItem: 1,
+      points_value: 34,
+      mon: false,
+      tue: false,
+      wen: false, 
+      thu: false,
+      fri: false,
+      sat: false,
+      sun: false,
       items: [
         { text: 'History', icon: 'mdi-clock' },
-        // { text: 'Audience', icon: 'mdi-account' },
-        // { text: 'Conversions', icon: 'mdi-flag' },
+        { text: 'Audience', icon: 'mdi-account' },
+        { text: 'Conversions', icon: 'mdi-flag' },
       ],
       files: [],
+      rows: [
+          {
+            id: 1,
+            name: 'Applications :',
+            children: [
+              { id: 2, name: 'Calendar : app' },
+              { id: 3, name: 'Chrome : app' },
+              { id: 4, name: 'Webstorm : app' },
+            ],
+          },
+          {
+            id: 5,
+            name: 'Documents :',
+            children: [
+              {
+                id: 6,
+                name: 'vuetify :',
+                children: [
+                  {
+                    id: 7,
+                    name: 'src :',
+                    children: [
+                      { id: 8, name: 'index : ts' },
+                      { id: 9, name: 'bootstrap : ts' },
+                    ],
+                  },
+                ],
+              },
+              {
+                id: 10,
+                name: 'material2 :',
+                children: [
+                  {
+                    id: 11,
+                    name: 'src :',
+                    children: [
+                      { id: 12, name: 'v-btn : ts' },
+                      { id: 13, name: 'v-card : ts' },
+                      { id: 14, name: 'v-window : ts' },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            id: 15,
+            name: 'Downloads :',
+            children: [
+              { id: 16, name: 'October : pdf' },
+              { id: 17, name: 'November : pdf' },
+              { id: 18, name: 'Tutorial : html' },
+            ],
+          },
+          {
+            id: 19,
+            name: 'Videos :',
+            children: [
+              {
+                id: 20,
+                name: 'Tutorials :',
+                children: [
+                  { id: 21, name: 'Basic layouts : mp4' },
+                  { id: 22, name: 'Advanced techniques : mp4' },
+                  { id: 23, name: 'All about app : dir' },
+                ],
+              },
+              { id: 24, name: 'Intro : mov' },
+              { id: 25, name: 'Conference introduction : avi' },
+            ],
+          },
+      ],
   }),
   computed: {
     formData: {
@@ -541,11 +559,49 @@ export default {
   },
   methods: {
     onClickOk() {
-      this.showModal = false;
-      this.showTreeviewModal = true;
+        this.showModal = false;
+        this.showTreeviewModal = true;
     },
     onTreeviewOk() {
       this.showTreeviewModal = false;
+      this.axios
+        .get("https://jsonplaceholder.typicode.com/todos/1")
+        .then((response) => {
+          this.$swal({
+            title: "Updated",
+            text: "Your Subject was updated successfully",
+            icon: "success",
+            confirmButtonText: "Done",
+          });
+        })
+        .catch((error) => {
+          this.$swal({
+            title: "Oops, Something went wrong ! ",
+            text: error.message,
+            icon: "warning",
+          });
+        });
+    },
+    onSettingsOk() {
+        //fake post request
+      this.showSettingsModal = false;
+      this.axios
+        .get("https://jsonplaceholder.typicode.com/todos/1")
+        .then((response) => {
+          this.$swal({
+            title: "Updated",
+            text: "The Setting was updated successfully",
+            icon: "success",
+            confirmButtonText: "Done",
+          });
+        })
+        .catch((error) => {
+          this.$swal({
+            title: "Oops, Something went wrong ! ",
+            text: error.message,
+            icon: "warning",
+          });
+        });
     },
     backToPreviousPage() {
       this.$router.back();
@@ -570,48 +626,27 @@ export default {
           });
         });
     },
-    onSettingsOk() {
-
-    }
   },
 };
 </script>
-<style scoped>
+
+<style>
 #parent { white-space: nowrap; }
 .child { display: inline-block; }
-
-#img-zoomer-box {
-  max-width: 800px;
-  height: auto;
-  position: relative;
-  margin: 10px auto;
+.zoom {
+  transition: transfrom .2s;
 }
-
-#img-1 {
-  width: 100%;
-  height: auto;
+.zoom:hover {
+  transform: scale(1.5);
 }
-
-#img-zoomer-box:hover, #img-zoomer-box:active {
-  cursor: zoom-in;
-  display: block;
+.hover-zoom-image {
+  width: 100%!important;
 }
-
-#img-zoomer-box:hover #img-2, #img-zoomer-box:active #img-2 {
-  opacity: 1;
+.dialog {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
 }
-#img-2 {
-  width: 340px;
-  height: 340px;
-  background: url('https://cdn.vuetifyjs.com/images/parallax/material.jpg') no-repeat #FFF;
-  box-shadow: 0 5px 10px -2px rgba(0,0,0,0.3);
-  pointer-events: none;
-  position: absolute;
-  opacity: 0;
-  border: 4px solid whitesmoke;
-  z-index: 99;
-  border-radius: 100%;
-  display: block;
-  transition: opacity .2s;
+.dialog:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 </style>

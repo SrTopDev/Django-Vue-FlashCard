@@ -31,17 +31,13 @@
   -o-background-size: cover;
 }
 
-.v1 {
-  border-left: 1px solid grey;
-}
-
 .sm-main-style {
   margin: auto;
   width: 95%;
 }
 .md-main-style {
   margin: auto;
-  width: 90%;
+  width: 95%;
 }
 
 .footer-md {
@@ -139,6 +135,4 @@
   opacity: 0;
   transform: scale(0.3) translateY(-50%);
 }
-
-
 </style>

@@ -65,7 +65,7 @@
             block
             class="pa-6 font-weight-bold"
             elevation="0"
-            @click="saveFormData1()"
+            @click="saveFormData()"
             >Sign Up</v-btn
           ></v-col
         >
@@ -97,7 +97,7 @@ export default {
     },
   },
   methods: {
-    saveFormData1() {
+    saveFormData() {
       this.$store.commit("authPageModule/setFormData", this.formData);
       this.$router.push("/profile");
     },

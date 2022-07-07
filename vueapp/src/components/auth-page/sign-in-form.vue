@@ -7,7 +7,7 @@
         'px-8': $vuetify.breakpoint.mdAndUp,
       }"
     >
-      <img src="@/assets/img/team.png" class="team-img pt-8" />
+      <img src="/static/src/vue/dist/img/team.png" class="team-img pt-8" />
       <h1 class="pb-8 font-weight-bold">Sign in</h1>
       <v-text-field
         prepend-inner-icon="mdi-account"
