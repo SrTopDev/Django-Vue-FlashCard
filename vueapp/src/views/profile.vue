@@ -32,8 +32,8 @@
                 </v-btn>
             </div>
             <div class="imageZoom">
-                <vue-hover-zoom 
-                    :imageUrl="imgURL"
+                <vue-hover-zoom
+                    :imageUrl="getImgUrl()"
                 >
                 </vue-hover-zoom>
             </div>
@@ -50,7 +50,7 @@
             <v-img
               :aspect-ratio="16/9"
               :height="500"
-              :src="imgURL"
+              :src="getImgUrl()"
             ></v-img>
             <v-row class="mt-5 justify-center">
                 <v-btn
@@ -294,15 +294,6 @@
                     solo dense
                   ></v-combobox>
               </v-col>
-              <div id="img-zoomer-box">
-              <v-img
-                id="img-1"
-                alt="Zoom Image on Mouseover"
-                :aspect-ratio="16/9"
-                src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
-              ></v-img>
-              <div id="img-2"></div>
-          </div>
           </v-row>
           <v-row>
               <v-col cols="4" class=" text-left">Wrong(difficult)</v-col>
@@ -413,11 +404,9 @@ export default {
       VueNumericInput,
       VueHoverZoom
   },
-  mounted() {
-
-  },
   data: () => ({
-      imgURL: '/static/src/vue/dist/img/OM1-1.jpeg',
+      // imgURL: 'https://picsum.photos/id/1005/600/200',
+      imgURL: 'OM1-1.jpeg',
       showModal: false,
       showTreeviewModal: false,
       showSettingsModal: false,
@@ -561,6 +550,10 @@ export default {
     onClickOk() {
         this.showModal = false;
         this.showTreeviewModal = true;
+    },
+    getImgUrl() {
+      var images = require.context('../assets/img/', false, /\.jpeg$/)
+      return images('./' + this.imgURL)
     },
     onTreeviewOk() {
       this.showTreeviewModal = false;
