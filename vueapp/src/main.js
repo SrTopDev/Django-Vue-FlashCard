@@ -9,9 +9,11 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
+
 Vue.config.productionTip = false;
 // axios
 Vue.use(VueAxios, axios);
+
 // sweet alert config
 const options = {
     confirmButtonColor: "#3085d6",

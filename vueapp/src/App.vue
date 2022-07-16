@@ -88,6 +88,7 @@
   margin: auto;
   text-align: center;
   width: 800px;
+  max-height: 800px;
   height: fit-content;
   padding: 2rem;
   border-radius: 1rem;
@@ -96,6 +97,28 @@
   z-index: 999;
   transform: none;
 }
+
+.faq-body {
+  background: #fff;
+  overflow: scroll;
+  border: 1px solid #7b7d7f;
+}
+
+.faq-body::-webkit-scrollbar {
+  width: 16px;
+}
+.faq-body::-webkit-scrollbar-thumb {
+  background-color: #7b7d7f;
+  border: 5px solid #fff;
+  border-radius: 10rem;
+}
+.faq-body::-webkit-scrollbar-track {
+  position: absolute;
+  right: -3rem;
+  top: -50rem;
+  background: transparent;
+}
+
 .modal h3 {
   margin: 0 0 1rem;
 }

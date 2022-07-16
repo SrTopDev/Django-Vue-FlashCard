@@ -4,6 +4,7 @@ import profile from '../views/profile.vue'
 import authPage from '../views/auth-page.vue'
 import stats from '../views/stats.vue'
 
+
 Vue.use(VueRouter)
 
 const routes = [{

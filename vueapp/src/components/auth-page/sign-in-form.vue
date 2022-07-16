@@ -12,12 +12,14 @@
       <v-text-field
         prepend-inner-icon="mdi-account"
         placeholder="Username"
+        v-model="username"
         filled
       ></v-text-field>
       <v-text-field
         prepend-inner-icon="mdi-lock"
         placeholder="Password"
         type="password"
+        v-model="password"
         filled
       ></v-text-field>
       <v-btn
@@ -43,6 +45,14 @@
   </div>
 </template>
 <script>
+import axios from 'axios'
+import Vue from 'vue'
+import VueToast from 'vue-toast-notification'
+import 'vue-toast-notification/dist/theme-sugar.css';
+
+Vue.use(VueToast, {
+  position: 'top'
+});
 export default {
   data: () => {
     return {
@@ -52,10 +62,26 @@ export default {
   },
   methods: {
     login() {
-      this.$store.dispatch("authPageModule/loginAndSaveToken", {
-        username: this.username,
-        asswor: this.password,
-      });
+        axios.get('http://localhost:8000/api/user_info/?user_id='+this.username+'&password='+this.password)
+        .then( response => {
+            this.subscriptions = response.data
+            console.log(this.subscriptions)
+            if (this.subscriptions.length != 0){
+              Vue.$toast.open('Success Login');
+              setTimeout(() => {                  
+                this.$store.dispatch("authPageModule/loginAndSaveToken", {
+                username: this.username,
+                asswor: this.password,
+                }); 
+              
+              }, 3000);
+            }
+            else {
+              Vue.$toast.error('Invalid Member');
+            }
+
+        });
+
     },
   },
 };

@@ -24,7 +24,7 @@
                     class="mx-2"
                     dark
                     color="teal"
-                    @click="showSettingsModal = true"
+                    @click="showSettingsModal = true;"
                 >
                 <v-icon dark>
                     mdi-format-list-bulleted-square
@@ -33,6 +33,7 @@
             </div>
             <div class="imageZoom">
                 <vue-hover-zoom
+                    showWhenImageLoaded="true"
                     :imageUrl="getImgUrl()"
                 >
                 </vue-hover-zoom>
@@ -173,7 +174,7 @@
             role="dialog"
             v-if="showModal"
             >
-            <h1>Vue Transitions</h1>
+            <h1>SELECT EXERCISE BOOK</h1>
             <v-list shaped dense min-height="240">
                 <v-subheader>SUBJECTS</v-subheader>
                 <v-list-item-group
@@ -236,8 +237,8 @@
               role="dialog"
               v-if="showTreeviewModal"
               >
-            <h1>Vue Transitions</h1>
-            <v-treeview
+            <h1>SELECT CONTENTS</h1>
+            <v-treeview class="treeview"
               selectable
               :items="rows"
             ></v-treeview>
@@ -251,14 +252,14 @@
           @click="showSettingsModal = false"></div>
     </transition>
     <transition name="pop" appear>
-      <div class="modal"
+      <div class="modal faq-body"
             role="dialog"
             v-if="showSettingsModal"
             >
           <h3>Waiting period for looking back</h3>
           <v-row>
               <v-col cols="4" class=" text-left">Correct(not difficult)</v-col>
-              <v-col cols="4"><vue-numeric-input v-model="not_difficult_value" :min="1" :max="30" controls-type="updown" autofocus>
+              <v-col cols="4"><vue-numeric-input v-model="not_difficult_value" :min="1" controls-type="updown" autofocus>
                               </vue-numeric-input>
               </v-col>
               <v-col cols="4">
@@ -398,7 +399,10 @@
 <script>
 import VueNumericInput from 'vue-numeric-input'
 import VueHoverZoom from 'vue-hover-zoom'
-
+import axios from 'axios'
+import Vue from 'vue'
+import VueToast from 'vue-toast-notification'
+import 'vue-toast-notification/dist/theme-sugar.css';
 export default {
   components: {
       VueNumericInput,
@@ -406,6 +410,7 @@ export default {
   },
   data: () => ({
       // imgURL: 'https://picsum.photos/id/1005/600/200',
+      temp:"",
       imgURL: 'OM1-1.jpeg',
       showModal: false,
       showTreeviewModal: false,
@@ -456,85 +461,13 @@ export default {
       fri: false,
       sat: false,
       sun: false,
-      items: [
-        { text: 'History', icon: 'mdi-clock' },
-        { text: 'Audience', icon: 'mdi-account' },
-        { text: 'Conversions', icon: 'mdi-flag' },
-      ],
+      items: [],
       files: [],
       rows: [
-          {
-            id: 1,
-            name: 'Applications :',
-            children: [
-              { id: 2, name: 'Calendar : app' },
-              { id: 3, name: 'Chrome : app' },
-              { id: 4, name: 'Webstorm : app' },
-            ],
-          },
-          {
-            id: 5,
-            name: 'Documents :',
-            children: [
-              {
-                id: 6,
-                name: 'vuetify :',
-                children: [
-                  {
-                    id: 7,
-                    name: 'src :',
-                    children: [
-                      { id: 8, name: 'index : ts' },
-                      { id: 9, name: 'bootstrap : ts' },
-                    ],
-                  },
-                ],
-              },
-              {
-                id: 10,
-                name: 'material2 :',
-                children: [
-                  {
-                    id: 11,
-                    name: 'src :',
-                    children: [
-                      { id: 12, name: 'v-btn : ts' },
-                      { id: 13, name: 'v-card : ts' },
-                      { id: 14, name: 'v-window : ts' },
-                    ],
-                  },
-                ],
-              },
-            ],
-          },
-          {
-            id: 15,
-            name: 'Downloads :',
-            children: [
-              { id: 16, name: 'October : pdf' },
-              { id: 17, name: 'November : pdf' },
-              { id: 18, name: 'Tutorial : html' },
-            ],
-          },
-          {
-            id: 19,
-            name: 'Videos :',
-            children: [
-              {
-                id: 20,
-                name: 'Tutorials :',
-                children: [
-                  { id: 21, name: 'Basic layouts : mp4' },
-                  { id: 22, name: 'Advanced techniques : mp4' },
-                  { id: 23, name: 'All about app : dir' },
-                ],
-              },
-              { id: 24, name: 'Intro : mov' },
-              { id: 25, name: 'Conference introduction : avi' },
-            ],
-          },
       ],
+      allrows: []
   }),
+
   computed: {
     formData: {
       get: function () {
@@ -542,14 +475,27 @@ export default {
       },
     },
     name() {
-      if (!this.formData.firstName || !this.formData.lastName) return "Anas KASMI";
+      if (!this.formData.firstName || !this.formData.lastName) return "FLASH CARD";
       else return this.formData.firstName + " " + this.formData.lastName;
     },
+  },
+  async created(){
+      Vue.$toast.open('Please wait until loading page..');
+      axios.get('http://localhost:8000/api/question_book/')
+      .then(response => {
+        for(var i = 0; i < response.data.length; i++)
+        {
+          this.items.push({text: response.data[i].file_name, icon: 'mdi-book'})
+          console.log(response.data[i].contents)
+          this.allrows.push(response.data[i].contents)
+        }
+      })
   },
   methods: {
     onClickOk() {
         this.showModal = false;
         this.showTreeviewModal = true;
+        this.rows = this.allrows[this.selectedItem]
     },
     getImgUrl() {
       var images = require.context('../assets/img/', false, /\.jpeg$/)
@@ -628,6 +574,9 @@ export default {
 .child { display: inline-block; }
 .zoom {
   transition: transfrom .2s;
+}
+.treeview {
+  flex : -1;
 }
 .zoom:hover {
   transform: scale(1.5);

@@ -14,12 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from cardapp import views as myapp_views
-from .routers import router
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path(r'.*', myapp_views.vue_test),
-    path('api/', include(router.urls))
+    path('', myapp_views.vue_test),
+    path('api/', include('cardapp.urls')),
+    re_path('^.*$', myapp_views.vue_test)
 ]

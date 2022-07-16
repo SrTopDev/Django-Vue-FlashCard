@@ -16,14 +16,14 @@
         v-model="formData.username"
       ></v-text-field>
       <v-text-field
-        placeholder="Password(repeat)"
+        placeholder="Password"
         prepend-inner-icon="mdi-lock"
         filled
         v-model="formData.password"
         type="password"
       ></v-text-field>
       <v-text-field
-        placeholder="Password"
+        placeholder="Password(repeat)"
         prepend-inner-icon="mdi-lock"
         filled
         v-model="formData.repeat_password"
@@ -43,6 +43,10 @@
   </div>
 </template>
 <script>
+import axios from 'axios'
+import Vue from 'vue'
+import VueToast from 'vue-toast-notification'
+import 'vue-toast-notification/dist/theme-sugar.css';
 export default {
   computed: {
     isSignInPanelActive: {
@@ -72,8 +76,25 @@ export default {
   },
   methods: {
     saveformData() {
-      this.$store.commit("authPageModule/setFormData", this.formData);
-      this.isSignInPanelActive = false;
+      console.log(this.formData)
+      
+      if (this.formData.password == this.formData.repeat_password){
+
+        var sumbit_form = {"user_id":this.formData.username, "password":this.formData.password}
+        axios.post('http://localhost:8000/api/user_info/', sumbit_form)
+        .then( response=>{
+                Vue.$toast.open('Success Register');
+                setTimeout(() => {   
+                  this.$store.commit("authPageModule/setFormData", this.formData);
+                  this.isSignInPanelActive = false;               
+                }, 1000);
+          }
+        )
+      }
+      else{
+        Vue.$toast.error('Invalid data');
+      }
+
     },
   },
 };
